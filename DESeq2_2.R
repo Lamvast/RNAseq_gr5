@@ -31,8 +31,6 @@ plotMA(res, ylim=c(-2,2))
 resSig <- subset(resOrdered, padj < 0.1)
 write.csv(as.data.frame(resSig), file = 'significant_de_genes.csv')
 
-EnhancedVolcano(res, lab = rownames(res), x = 'log2FoldChange', y = 'pvalue')
-
 EnhancedVolcano(res,
                 lab = rownames(res),
                 x = 'log2FoldChange',
