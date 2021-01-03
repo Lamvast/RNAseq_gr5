@@ -19,7 +19,7 @@ dds <- ddsHTSeq[keep,]
 
 dds$condition <- relevel(dds$condition, ref = "A24wt")
 
-dds <- DESeq(dds)
+dds <- DESeq(dds, test="LRT", reduced = ~1)
 res <- results(dds)
 
 resOrdered <- res[order(res$pvalue),]
@@ -29,7 +29,7 @@ sum(res$padj < 0.1, na.rm=TRUE)
 plotMA(res, ylim=c(-2,2))
 
 resSig <- subset(resOrdered, padj < 0.1)
-write.csv(as.data.frame(resSig), file = 'significant_de_genes')
+write.csv(as.data.frame(resSig), file = 'significant_de_genes.csv')
 
 EnhancedVolcano(res, lab = rownames(res), x = 'log2FoldChange', y = 'pvalue')
 
